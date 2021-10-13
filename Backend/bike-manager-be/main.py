@@ -1,7 +1,7 @@
 from fastapi import FastAPI 
 
 from bike.TipoBike import TipoBike
-from bike.persistencia.MockRepositorioBike import MockRepositorioBike
+from bike.persistencia.MockRepositorioBike import MockRepositorioBike as RepositorioBike
 
 app = FastAPI() 
 
@@ -11,5 +11,7 @@ def server_status_index():
 
 @app.get("/bikes")
 def get_bikes(tipo: TipoBike = None, marchas: int = None, aro: int = None):
-    print(f'Searched for tipo: {tipo}, marchas: {marchas}, aro: {aro}')
-    return [MockRepositorioBike.find()]
+    print(f'Processando pesquisa por tipo: {tipo}, marchas: {marchas}, aro: {aro}')
+    encontradas = RepositorioBike.find(tipo, marchas, aro)
+    return encontradas
+
