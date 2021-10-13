@@ -30,10 +30,20 @@ Você deve perceber várias linhas de log aparecendo. Se tudo correu bem, verá 
 
 Para testar que o sistema foi inicializado corretamente, abra o seu browser e acesse http://localhost:8000/ (ou equivalente). Você deverá receber na página um JSON como esse: `{"Status":"It lives!"}`. Se chegou nesse ponto, sucesso! Caso tenha encontrado algum problema, verifique se seguiu todos os passos e não obteve nenhum erro neles.
 
+A parte `--reload` do comando utilizado faz com que qualquer alteração que seja feita no código do backend seja dinamicamente recarregado, portanto não é necessário reiniciar o servidor ao fazer alguma alteração.
+
 ## Encerrando
 
 Uma vez que deseje encerrar o servidor, aperte Ctrl+C na janela do terminal onde inicializou ele para encerrá-lo.
 
+
+# API
+
+## Documentação
+
+Para checar os endpoints fornecidos, acesse http://localhost:8000/docs no seu browser. Lá, encontrará uma lista com os endpoints e métodos disponíveis para eles, incluindo quais parâmetros podem receber.
+
+Essa página é gerada dinamicamente de acordo com o que está definido no código, portanto estará sempre atualizada de acordo com a versão que você possui localmente.
 
 
 
