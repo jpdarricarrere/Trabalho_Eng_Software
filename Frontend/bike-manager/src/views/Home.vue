@@ -4,7 +4,7 @@
     <div class="container">
     <div class="row">
       <div class="col">
-        <div class="card-body mt-2" >
+        <div class="card-body" >
           <img src="../assets/bike-mtb.png" />
         </div>
       </div>
