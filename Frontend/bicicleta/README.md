@@ -1,4 +1,4 @@
-# bike-manager
+# bicicleta
 
 ## Project setup
 ```
