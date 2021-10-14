@@ -5,9 +5,11 @@
  
     <input class="form-control" v-model="search" placeholder="Procure por nome ou modelo de bicicleta">
       <div>
+        <!-- img-src so pega imagens com url -->
+        
   <b-card
-    title="Card Title"
-    img-src="/assets/bike-mtb.png"
+    title= "MTB Specialized"
+    img-src="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg"
     img-alt="Image"
     img-top
     tag="article"
@@ -15,10 +17,10 @@
     class="mb-2"
   >
     <b-card-text>
-      Some quick example text to build on the card title and make up the bulk of the card's content.
+      Bicicleta Aro 29 boa para trilhas em terrenos dificeis 
     </b-card-text>
 
-    <b-button href="javascript:;" variant="primary">Go somewhere</b-button>
+    <b-button href="javascript:;" variant="primary">Alugue</b-button>
   </b-card>
 </div>
 
