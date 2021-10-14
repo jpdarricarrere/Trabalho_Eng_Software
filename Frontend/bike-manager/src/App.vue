@@ -1,23 +1,12 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo-bike.png">
-  <!--<HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  <a class="text-center" href="/home">bikes</a>
-  <router-link to="/home" active-class="active" exact></router-link>
-  <router-view class="container-xxl mt-3" />
+  <div id="nav">
+  
+    <router-link to="/home">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  <router-view />
+  </div>
+
 </template>
-
-<script>
-//import HelloWorld from './components/HelloWorld.vue'
-
-
-export default {
-  name: 'Home',
-  components: {
-    //HelloWorld,
-    
-  }
-}
-</script>
 
 <style>
 #app {
@@ -26,6 +15,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
