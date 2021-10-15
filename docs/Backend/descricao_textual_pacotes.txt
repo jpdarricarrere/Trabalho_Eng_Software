@@ -1,0 +1,23 @@
+Organizamos o backend em 9 módulos, que estão presentes no diagrama de pacotes mostrado: Sessão, Empréstimo, Cliente, Multa, Pagamento, Bicicleta, Entregador, Entrega e Avaliação.
+
+O módulo Sessão é o que menos interage com o resto do sistema, tendo como principal responsabilidade tratar operações como login e validação de que o usuário existe, tem um login válido, etc.
+
+O módulo Empréstimo é o que mais tem dependências com os demais, o que de certa forma é esperado pois tem como responsabilidade operações que envolvem a principal transação que o sistema fornece. Algumas das operações que ele gerencia são visualizar empréstimos ativos, visualizar histórico de empréstimo, criar um novo empréstimo, verificar se cliente tem empréstimos suficientes para receber um bônus de fidelidade, etc. Para efetuar essas operações, depende de serviços fornecidos por vários outros módulos, como por exemplo: criar um novo pagamento/multa (módulos Pagamento e Multa), alterar disponibilidade de bicicletas quando o empréstimo for confirmado/encerrado (módulo Bicicleta), criar uma nova entrega (módulo Entrega), encontrar um entregador e assignar a ele uma entrega (módulo Entregador), etc.
+
+O módulo Cliente tem como responsabilidade operações que atuem sobre os dados de cliente, tal como criar um novo cliente, visualizar dados, editar, deletar. Em particular, ele utiliza o módulo de Pagamento para encontrar todos os pagamentos pendentes a um cliente, ou informações de um pagamento específico.
+
+O módulo Multa é simples, sua principal função é fornecer ao módulo de Empréstimo a criação de uma multa, para isso utilizando a operação de criação do módulo de Pagamento.
+
+O módulo Pagamento serve como uma abstração para pagamentos de empréstimos e multas. Oferece para esses módulos a criação de um novo, bem como verificação de pendências para um cliente específico.
+
+O módulo Bicicleta tem como responsabilidade as operações em cima do principal recurso do sistema, em particular o básico de um Create-Read-Update-Delete. Ele fornece uma série de serviços para o módulo de Empréstimo, como alterar disponibilidade uma bicicleta e enviar bicicleta para manutenção ao final de um empréstimo.
+
+O módulo Entregador é responsável por operações básicas em cima de entregadores, e fornece uma forma de encontrar um entregador a ser assignado. Depende do módulo Entrega para poder gerar relatório de todas as entregas feitas por um entregador, bem como descobrir as entregas pendentes para um entregador.
+
+O módulo Entrega gerencia entregas, em especial permitindo alterar datas e locais desejados. Também fornece uma forma de visualizar entregas pendentes.
+
+O módulo Avaliação fica responsável por avaliações que clientes façam, podendo ser sobre bicicletas ou sobre entregadores. Avaliações contém uma nota e um comentário. O módulo fornece como serviço encontrar todas as avaliações para uma determinada entidade bem como a média das notas recebidas por uma entidade.
+
+O diagrama mostra apenas os módulos do "core" do sistema, ou seja do seu funcionamento interno. O que gerencia sua comunicação com o mundo externo é uma camada de API que fornece endpoints para chamadas de HTTP vindas do frontend do sistema e então chama os serviços fornecidos pelos módulos aqui explicados e que aparecem no diagrama. Deixamos essa camada de fora porque, como ela orquestra operações de praticamente todos os módulos, acabaria poluindo demais o diagrama sem acrescentar muito ao compreendimento da organização dos módulos. Além disso, ela deve ter uma implementação muito simples, outorgando aos módulos internos toda a lógica de negócio, portanto seu impacto no sistema é pequeno e puramente técnico.
+
+
