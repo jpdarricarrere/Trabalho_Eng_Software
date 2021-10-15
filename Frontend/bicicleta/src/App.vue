@@ -4,7 +4,7 @@
       <img id="logo" alt="logo" src="./assets/logo-bike.png" />
       <input class="input-search" v-model="search" placeholder="Procure por nome ou modelo de bicicleta">
     </div>
-    
+
   <div>
         <!-- img-src so pega imagens com url -->
   <div class="col d-flex justify-content-center ">
@@ -56,7 +56,7 @@
   </b-card>
   </b-card-group> 
   </div>
-  <div class="col d-flex justify-content-center">
+<div class="col d-flex justify-content-center">
   <b-card-group> 
   <b-card
     title= "MTB Specialized"
@@ -114,13 +114,23 @@
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
-
+import axios from "axios";
 export default {
   name: "App",
   components: {
     //  HelloWorld
   },
+  data(){
+    return{
+    search:"",
+    bikes:[],
+  }
+  },
+  async created(){
+    await axios.get("api/bicicletas/").then((response) => (this.bikes = response.data));
+  }
 };
+
 </script>
 
 <style>
