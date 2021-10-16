@@ -1,10 +1,13 @@
 <template>
   <div >
-    <div id="header">
+   
+    <Navbar /> 
+    
+    <!--<div id="header">
       <img id="logo" alt="logo" src="./assets/logo-bike.png" />
       <input class="input-search" v-model="search" placeholder="Procure por nome ou modelo de bicicleta">
     </div>
-
+-->
   <div>
         <!-- img-src so pega imagens com url -->
   <div class="col d-flex justify-content-center ">
@@ -114,11 +117,13 @@
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
-import axios from "axios";
+import Navbar from './components/Navbar.vue'
+//import axios from "axios";
 export default {
   name: "App",
   components: {
     //  HelloWorld
+    Navbar,
   },
   data(){
     return{
@@ -127,8 +132,15 @@ export default {
   }
   },
   async created(){
-    await axios.get("api/bicicletas/").then((response) => (this.bikes = response.data));
-  }
+    //await axios.get("api/bicicletas/").then((response) => (this.bikes = response.data));
+  },
+  computed:{
+    filteredBikes: function(){
+      return this.bikes.filter((bikes) => {
+        return bikes.name.match(this.search) !== null;
+      });
+    },
+  },
 };
 
 </script>
