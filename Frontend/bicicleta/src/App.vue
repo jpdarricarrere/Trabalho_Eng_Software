@@ -2,7 +2,7 @@
   <div >
    
     <Navbar  /> 
-     <input
+    <input
           class="form-control"
           type="text"
           placeholder="Pesquisar pelo nome ou modelo..."
