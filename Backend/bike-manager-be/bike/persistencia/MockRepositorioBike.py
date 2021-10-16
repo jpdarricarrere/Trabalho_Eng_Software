@@ -23,6 +23,12 @@ class MockRepositorioBike(IRepositorioBike):
     def find(tipo: TipoBike, nome: str, modelo: str, marchas: int, aro: int):
         encontradas = _all_bikes[:]
 
+        if nome != '':
+            encontradas = [bike for bike in encontradas if nome in bike.get_nome()]
+
+        if modelo != '':
+            encontradas = [bike for bike in encontradas if modelo in bike.get_modelo()]
+
         if tipo is not None:
             encontradas = [bike for bike in encontradas if bike.get_tipo() == tipo]
 
@@ -31,11 +37,5 @@ class MockRepositorioBike(IRepositorioBike):
 
         if aro is not None:
             encontradas = [bike for bike in encontradas if bike.get_aro() == aro]
-
-        if nome != '':
-            encontradas = [bike for bike in encontradas if nome in bike.get_nome()]
-
-        if modelo != '':
-            encontradas = [bike for bike in encontradas if modelo in bike.get_modelo()]
 
         return encontradas 
