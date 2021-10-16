@@ -1,165 +1,98 @@
 <template>
   <div >
    
-    <Navbar /> 
-    
-    <!--<div id="header">
-      <img id="logo" alt="logo" src="./assets/logo-bike.png" />
-      <input class="input-search" v-model="search" placeholder="Procure por nome ou modelo de bicicleta">
-    </div>
--->
-  <div>
+    <Navbar  /> 
+     <input
+          class="form-control"
+          type="text"
+          placeholder="Pesquisar pelo nome ou modelo..."
+          v-model="search"
+        /> 
+  
         <!-- img-src so pega imagens com url -->
   <div class="col d-flex justify-content-center ">
-  <b-card-group> 
-  <b-card
-    title= "MTB Specialized"
-    img-src="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg"
-    img-alt="Image"
-    img-top
-    tag="article"
-    style="max-width: 19.5rem;"
-    class="mb-2"
-  >
-    <b-card-text>
-      Bicicleta Aro 29 boa para trilhas em terrenos dificeis 
-    </b-card-text>
-
-    <b-button href="javascript:;" variant="primary">Alugue</b-button>
-  </b-card>
-  <b-card
-    title= "MTB Specialized"
-    img-src="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg"
-    img-alt="Image"
-    img-top
-    tag="article"
-    style="max-width: 19.5rem;"
-    class="mb-2"
-  >
-    <b-card-text>
-      Bicicleta Aro 29 boa para trilhas em terrenos dificeis 
-    </b-card-text>
-
-    <b-button href="javascript:;" variant="primary">Alugue</b-button>
-  </b-card>
-  <b-card
-    title= "MTB Specialized"
-    img-src="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg"
-    img-alt="Image"
-    img-top
-    tag="article"
-    style="max-width: 19.5rem;"
-    class="mb-2"
-  >
-    <b-card-text>
-      Bicicleta Aro 29 boa para trilhas em terrenos dificeis 
-    </b-card-text>
-
-    <b-button href="javascript:;" variant="primary">Alugue</b-button>
-  </b-card>
-  </b-card-group> 
-  </div>
-<div class="col d-flex justify-content-center">
-  <b-card-group> 
-  <b-card
-    title= "MTB Specialized"
-    img-src="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg"
-    img-alt="Image"
-    img-top
-    tag="article"
-    style="max-width: 19.5rem;"
-    class="mb-2"
-  >
-    <b-card-text>
-      Bicicleta Aro 29 boa para trilhas em terrenos dificeis 
-    </b-card-text>
-
-    <b-button href="javascript:;" variant="primary">Alugue</b-button>
-  </b-card>
-  <b-card
-    title= "MTB Specialized"
-    img-src="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg"
-    img-alt="Image"
-    img-top
-    tag="article"
-    style="max-width: 19.5rem;"
-    class="mb-2"
-  >
-    <b-card-text>
-      Bicicleta Aro 29 boa para trilhas em terrenos dificeis 
-    </b-card-text>
-
-    <b-button href="javascript:;" variant="primary">Alugue</b-button>
-  </b-card>
-  <b-card
-    title= "MTB Specialized"
-    img-src="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg"
-    img-alt="Image"
-    img-top
-    tag="article"
-    style="max-width: 19.5rem;"
-    class="mb-2"
-  >
-    <b-card-text>
-      Bicicleta Aro 29 boa para trilhas em terrenos dificeis 
-    </b-card-text>
-
-    <b-button href="javascript:;" variant="primary">Alugue</b-button>
-  </b-card>
-  </b-card-group> 
+       
+    <b-row>
+    <b-card-group class="col-md-3" v-for="bike in filteredBikes" v-bind:key="bike">
+        <b-card 
+                v-bind:title= "bike.nome"
+                v-bind:img-src=  "bike.link_imagem"
+                img-alt="Img"
+                img-top>
+            <p class="card-text">
+                descrição da bike</p>
+            
+            <div slot="footer">
+                <b-btn variant="primary" block>Alugue</b-btn>
+            </div>
+        </b-card>
+    </b-card-group>
+  </b-row>
   </div>
 </div>
 
 
-    <!--<HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  </div>
+    
+  
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
-import Navbar from './components/Navbar.vue'
-//import axios from "axios";
+import Navbar from "./components/Navbar.vue";
+import axios from "axios";
+
 export default {
   name: "App",
   components: {
     //  HelloWorld
     Navbar,
   },
-  data(){
-    return{
-    search:"",
-    bikes:[],
-  }
+  data() {
+    return {
+      search: "",
+      bikes: [],
+    };
   },
-  async created(){
-    //await axios.get("api/bicicletas/").then((response) => (this.bikes = response.data));
+  async created() {
+    await axios
+      .get("http://127.0.0.1:8000/bikes")
+      .then((response) => (this.bikes = response.data))
+      .catch((error) => console.log(error));
   },
-  computed:{
-    filteredBikes: function(){
+  computed: {
+    filteredBikes: function () {
       return this.bikes.filter((bikes) => {
-        return bikes.name.match(this.search) !== null;
+        return bikes.nome.match(this.search) !== null;
       });
+    },
+    formattedBikes() {
+      return this.bikes.reduce((c, n, i) => {
+        if (i % 4 === 0) c.push([]);
+        c[c.length - 1].push(n);
+        return c;
+      }, []);
+    },
+
+    searchBikes() {
+      return this.$refs.search.search_return();
     },
   },
 };
-
 </script>
 
 <style>
-#logo{
+#logo {
   max-width: 80px;
   max-height: 80px;
 }
 
-.input-search{
+.input-search {
   height: 50%;
   width: 30%;
   margin-left: 30%;
 }
 
-.mb-2{
-    margin-left: 10px;
+.mb-2 {
+  margin-left: 10px;
 }
-
-
 </style>

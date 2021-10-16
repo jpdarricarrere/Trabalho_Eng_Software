@@ -5,17 +5,19 @@
         <img src="../assets/logo-bike-nome.png" height="75" alt="Logo-rike" />
       </a>
     </ul>
-
+<!-- 
     <ul class="navbar-nav">
-      <form class="text">
+     <form class="text">
         <input
           class="form-control"
           type="text"
           placeholder="Pesquisar pelo nome ou modelo..."
-          aria-label="Pesquisar"
+          v-model="search"
         />       
       </form>
+
     </ul>
+-->
     <ul class="navbar-nav">
        <li class="nav-item me-3">
            <router-link to="/login" active-class="active" class="nav-link" exact>
@@ -44,13 +46,20 @@ export default {
   name: "Login",
   components: {},
   data() {
-    return {};
+    return {
+        search:""
+    };
   },
   methods: {
     async logout() {
       /* Faz a partde de deslogar com o autenticador*/
       await axios.delete(/*caminho do back */);
       this.$router.push("/login");
+    },
+    search_return(){
+      console.log(this.search);
+      return this.search;
+      
     },
   },
 };
