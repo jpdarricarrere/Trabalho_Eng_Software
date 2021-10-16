@@ -20,7 +20,7 @@ class MockRepositorioBike(IRepositorioBike):
     def get_all():
         return _all_bikes[:]
     
-    def find(tipo: TipoBike, marchas: int, aro: int):
+    def find(tipo: TipoBike, nome: str, modelo: str, marchas: int, aro: int):
         encontradas = _all_bikes[:]
 
         if tipo is not None:
@@ -31,5 +31,8 @@ class MockRepositorioBike(IRepositorioBike):
 
         if aro is not None:
             encontradas = [bike for bike in encontradas if bike.get_aro() == aro]
+
+        if nome != '':
+            encontradas = [bike for bike in encontradas if nome in bike.get_nome()]
 
         return encontradas 
