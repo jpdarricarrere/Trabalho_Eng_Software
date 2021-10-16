@@ -19,7 +19,7 @@ def server_status_index():
 
 @app.get("/bikes")
 def get_bikes(tipo: TipoBike = None, nome: str = "", modelo: str = "", marchas: int = None, aro: int = None):
-    print(f'Processando pesquisa por tipo: {tipo}, nome: {nome}, marchas: {marchas}, aro: {aro}')
+    print(f'Processando pesquisa por tipo: {tipo}, nome: {nome}, modelo: {modelo}, marchas: {marchas}, aro: {aro}')
     encontradas = RepositorioBike.find(tipo, nome, modelo, marchas, aro)
     return encontradas
 

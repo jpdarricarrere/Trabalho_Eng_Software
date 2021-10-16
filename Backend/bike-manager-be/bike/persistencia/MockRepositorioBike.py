@@ -35,4 +35,7 @@ class MockRepositorioBike(IRepositorioBike):
         if nome != '':
             encontradas = [bike for bike in encontradas if nome in bike.get_nome()]
 
+        if modelo != '':
+            encontradas = [bike for bike in encontradas if modelo in bike.get_modelo()]
+
         return encontradas 
