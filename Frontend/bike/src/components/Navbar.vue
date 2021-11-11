@@ -5,7 +5,7 @@
         <img src="../assets/logo-bike-nome.png" height="75" alt="Logo-rike" />
       </a>
     </ul>
-<!--
+
     <ul class="navbar-nav">
      <form class="text">
         <input
@@ -17,7 +17,7 @@
       </form>
 
     </ul>
-    -->
+    
     <ul class="navbar-nav">
        <li class="nav-item me-3">
            <router-link to="/login" active-class="active" class="nav-link" exact>

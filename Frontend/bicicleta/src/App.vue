@@ -1,7 +1,7 @@
 <template>
   <div >
    <router-link to="/home">Home</router-link> |
-    <!--<Navbar  /> -->
+    <Navbar  />
     <input
           class="form-control"
           type="text"
@@ -38,14 +38,14 @@
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
-//import Navbar from "./components/Navbar.vue";
+import Navbar from "./components/Navbar.vue";
 import axios from "axios";
 
 export default {
   name: "App",
   components: {
     //  HelloWorld
-    //Navbar,
+    Navbar,
   },
   data() {
     return {
