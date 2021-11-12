@@ -16,7 +16,7 @@
                 descrição da bike</p>
             
             <div slot="footer">
-                <b-btn variant="primary" block>Alugue</b-btn>
+                <b-btn type="button" href="/payment" variant="primary" block>Alugue</b-btn>
             </div>
         </b-card>
     </b-card-group>

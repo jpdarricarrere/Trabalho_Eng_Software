@@ -1,160 +1,158 @@
 <template>
-    <div class="container">
+    <div class="container mt-5 px-5">
+    <div class="mb-4">
+        <h2>Confirm order and pay</h2> <span>please make the payment, after that you can enjoy all the features and benefits.</span>
+    </div>
     <div class="row">
-        <!-- You can make it whatever width you want. I'm making it full width
-             on <= small devices and 4/12 page width on >= medium devices -->
-        <div class="col-xs-12 col-md-4">
-        
-        
-            <!-- CREDIT CARD FORM STARTS HERE -->
-            <div class="panel panel-default credit-card-box">
-                <div class="panel-heading display-table" >
-                    <div class="row display-tr" >
-                        <h3 class="panel-title display-td" >Payment Details</h3>
-                        <div class="display-td" >                            
-                            <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+        <div class="col-md-8">
+            <div class="card p-3">
+                <h6 class="text-uppercase">Payment details</h6>
+                <div class="inputbox mt-3"> <input type="text" name="name" class="form-control" required="required"> <span>Name on card</span> </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <i class="fa fa-credit-card"></i> <span>Card Number</span> </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex flex-row">
+                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Expiry</span> </div>
+                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>CVV</span> </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <form role="form" id="payment-form" method="POST" action="javascript:void(0);">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="cardNumber">CARD NUMBER</label>
-                                    <div class="input-group">
-                                        <input 
-                                            type="tel"
-                                            class="form-control"
-                                            name="cardNumber"
-                                            placeholder="Valid Card Number"
-                                            autocomplete="cc-number"
-                                            required autofocus 
-                                        />
-                                        <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
-                                    </div>
-                                </div>                            
-                            </div>
+                <div class="mt-4 mb-4">
+                    <h6 class="text-uppercase">Billing Address</h6>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Street Address</span> </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-7 col-md-7">
-                                <div class="form-group">
-                                    <label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
-                                    <input 
-                                        type="tel" 
-                                        class="form-control" 
-                                        name="cardExpiry"
-                                        placeholder="MM / YY"
-                                        autocomplete="cc-exp"
-                                        required 
-                                    />
-                                </div>
-                            </div>
-                            <div class="col-xs-5 col-md-5 pull-right">
-                                <div class="form-group">
-                                    <label for="cardCVC">CV CODE</label>
-                                    <input 
-                                        type="tel" 
-                                        class="form-control"
-                                        name="cardCVC"
-                                        placeholder="CVC"
-                                        autocomplete="cc-csc"
-                                        required
-                                    />
-                                </div>
-                            </div>
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>City</span> </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="couponCode">COUPON CODE</label>
-                                    <input type="text" class="form-control" name="couponCode" />
-                                </div>
-                            </div>                        
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>State/Province</span> </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <button class="subscribe btn btn-success btn-lg btn-block" type="button">Start Subscription</button>
-                            </div>
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Zip code</span> </div>
                         </div>
-                        <div class="row" style="display:none;">
-                            <div class="col-xs-12">
-                                <p class="payment-errors"></p>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
-            </div>            
-            <!-- CREDIT CARD FORM ENDS HERE -->
-            
-            
-        </div>            
-        
-        <div class="col-xs-12 col-md-8" style="font-size: 12pt; line-height: 2em;">
-            <a><h1>Features:</h1>
-                <ul>
-                    <li>As-you-type, input formatting</li>
-                    <li>Form field validation (also as you type)</li>
-                    <li>Graceful error feedback for declined card, etc</li>
-                    <li>AJAX form submission w/ visual feedback</li>
-                    <li>Creates a Stripe credit card token</li>
-                </ul>
-            </a>
-            <p>Be sure to replace the dummy API key with a valid Stripe API key.</p>
-            
-            <p>Built upon: Bootstrap, jQuery, 
-                <a href="http://jqueryvalidation.org/">jQuery Validation Plugin</a>, 
-                <a href="https://github.com/stripe/jquery.payment">jQuery.payment library</a>,
-                and <a href="https://stripe.com/docs/stripe.js">Stripe.js</a>
-            </p>
+            </div>
+            <div class="mt-4 mb-4 d-flex justify-content-between"> <span>Previous step</span> <button class="btn btn-success px-3">Pay $840</button> </div>
         </div>
-        
+        <div class="col-md-4">
+            <div class="card card-blue p-3 text-white mb-3"> <span>You have to pay</span>
+                <div class="d-flex flex-row align-items-end mb-3">
+                    <h1 class="mb-0 yellow">$549</h1> <span>.99</span>
+                </div> <span>Enjoy all the features and perk after you complete the payment</span> <a href="#" class="yellow decoration">Know all the features</a>
+                <div class="hightlight"> <span>100% Guaranteed support and update for the next 5 years.</span> </div>
+            </div>
+        </div>
     </div>
 </div>
 </template>
 <style scoped>
-/* Padding - just for asthetics on Bootsnipp.com */
-body { margin-top:20px; }
+body {
+    background-color: #eee
+}
 
-/* CSS for Credit Card Payment form */
-.credit-card-box .panel-title {
-    display: inline;
-    font-weight: bold;
+.container {
+    height: 100vh
 }
-.credit-card-box .form-control.error {
-    border-color: red;
+
+.card {
+    border: none
+}
+
+.form-control {
+    border-bottom: 2px solid #eee !important;
+    border: none;
+    font-weight: 600
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #8bbafe;
     outline: 0;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(255,0,0,0.6);
+    box-shadow: none;
+    border-radius: 0px;
+    border-bottom: 2px solid blue !important
 }
-.credit-card-box label.error {
-  font-weight: bold;
-  color: red;
-  padding: 2px 8px;
-  margin-top: 2px;
+
+.inputbox {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%
 }
-.credit-card-box .payment-errors {
-  font-weight: bold;
-  color: red;
-  padding: 2px 8px;
-  margin-top: 2px;
+
+.inputbox span {
+    position: absolute;
+    top: 7px;
+    left: 11px;
+    transition: 0.5s
 }
-.credit-card-box label {
-    display: block;
+
+.inputbox i {
+    position: absolute;
+    top: 13px;
+    right: 8px;
+    transition: 0.5s;
+    color: #3F51B5
 }
-/* The old "center div vertically" hack */
-.credit-card-box .display-table {
-    display: table;
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0
 }
-.credit-card-box .display-tr {
-    display: table-row;
+
+.inputbox input:focus~span {
+    transform: translateX(-0px) translateY(-15px);
+    font-size: 12px
 }
-.credit-card-box .display-td {
-    display: table-cell;
-    vertical-align: middle;
-    width: 50%;
+
+.inputbox input:valid~span {
+    transform: translateX(-0px) translateY(-15px);
+    font-size: 12px
 }
-/* Just looks nicer */
-.credit-card-box .panel-heading img {
-    min-width: 180px;
+
+.card-blue {
+    background-color: #492bc4
+}
+
+.hightlight {
+    background-color: #5737d9;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 15px;
+    font-size: 14px
+}
+
+.yellow {
+    color: #fdcc49
+}
+
+.decoration {
+    text-decoration: none;
+    font-size: 14px
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #492bc4;
+    border-color: #492bc4
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: #492bc4;
+    border-color: #492bc4
+}
+
+.decoration:hover {
+    text-decoration: none;
+    color: #fdcc49
 }
 </style>
