@@ -46,3 +46,13 @@ class Usuario:
 
     def set_senha(self, nova_senha: str) -> None:
         self.senha = nova_senha
+
+    def dto(self) -> dict:      # Retornar soh informacoes aceitaveis na API
+        return {
+            'id': self.id,
+            'tipo': self.tipo,
+            'nome': self.nome,
+            'data_nascimento': self.data_nascimento.strftime('%x'),  # %x = formato local de data
+                                                                     # Ref: https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior
+            'email': self.email
+        }

@@ -8,4 +8,4 @@ router = APIRouter(
 @router.get("/")
 def get_usuarios():
     encontrados = RepositorioUsuario.get_all()
-    return encontrados
+    return [u.dto() for u in encontrados]
