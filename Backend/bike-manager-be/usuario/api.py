@@ -2,7 +2,10 @@ from fastapi import APIRouter
 
 from .Sessao import Sessao
 from .integracao.DTOLoginRequest import DTOLoginRequest
+
+from .ServicoUsuario import ServicoUsuario
 from .persistencia.InMemoryRepositorioUsuario import InMemoryRepositorioUsuario as RepositorioUsuario
+from .integracao.DTOCriarUsuario import DTOCriarUsuario
 
 
 router = APIRouter(
@@ -41,3 +44,10 @@ def get_dados_usuario(id_usuario: int):
     if usuario is not None:
         dto = usuario.dto()
     return dto
+
+@router.post('/')
+def cria_usuario(dados: DTOCriarUsuario):
+    return ServicoUsuario.criar(
+        dados.tipo, dados.nome, dados.ano_nascimento, dados.mes_nascimento, dados.dia_nascimento, dados.email, dados.senha
+    )
+    
