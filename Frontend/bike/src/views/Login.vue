@@ -6,8 +6,8 @@
                     <img src="../assets/logo-bike-nome.png"  alt="Logo-rike" />
                     <div class="card-body mt-2">
                         <form action="" autocomplete="off">
-                            <label class="form-label mt-2">Username</label>
-                                <input type="text" class="form-control " v-model="credentials.username">                            
+                            <label class="form-label mt-2">Email</label>
+                                <input type="text" class="form-control " v-model="credentials.email">                            
                                 <label class="form-label mt-2">Password</label>
                                 <input type="password" class="form-control" v-model="credentials.password">
                             <button type="button" id="sendlogin" class="btn btn-primary mt-2">login</button>
@@ -23,19 +23,19 @@
 </template>
 
 <script>
-//import axios from "axios";
+import axios from "axios";
 export default {
     data(){
         return{
             credentials:{
-                username:"",
+                email:"",
                 password:""
             }
         }
     },
     methods:{
         async login(){
-            ///await axios.post("api/auth/login", this.credentials);
+            await axios.post("http://127.0.0.1:8000/login", this.credentials);
         }
     }
 }

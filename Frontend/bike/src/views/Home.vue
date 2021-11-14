@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Navbar  />
+  <Navbar @inputData="updateSearch" />
   
         <!-- img-src so pega imagens com url -->
   <div class="col d-flex justify-content-center ">
@@ -65,11 +65,17 @@ export default {
         return c;
       }, []);
     },
-
+/*
     searchBikes() {
       return this.$refs.search.search_return();
     },
+    */
   },
+  methods:{
+    updateSearch(variable){
+      this.search = variable;
+    }
+  }
 };
 </script>
 

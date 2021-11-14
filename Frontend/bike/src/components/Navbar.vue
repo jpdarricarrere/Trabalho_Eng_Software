@@ -12,7 +12,7 @@
           class="form-control"
           type="text"
           placeholder="Pesquisar pelo nome ou modelo..."
-          v-model="search"
+          v-model="search" @keyup.enter="submit"
         />       
       </form>
 
@@ -56,11 +56,10 @@ export default {
       await axios.delete(/*caminho do back */);
       this.$router.push("/login");
     },
-    search_return(){
-      console.log(this.search);
-      return this.search;
-      
-    },
+    submit: function() {
+      this.$emit("inputData", this.tempMessage);
+      this.tempMessage = "";
+    }
   },
 };
 </script>

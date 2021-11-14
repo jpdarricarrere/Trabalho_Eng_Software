@@ -8,6 +8,10 @@
                         <form @submit="create" autocomplete="off">
                             <label class="form-label mt-2">Nome Completo</label>
                                 <input type="text" class="form-control " v-model="credentials.nome" placeholder="Guilherme Santana">                            
+                                <label class="form-label mt-2">Data de Nascimento</label>
+                                <input type="text" class="form-control " v-model="credentials.dia" placeholder="dia">
+                                <input type="text" class="form-control " v-model="credentials.mes" placeholder="mes">
+                                <input type="text" class="form-control " v-model="credentials.ano" placeholder="ano">
                                 <label class="form-label mt-2">Email</label>
                                 <input type="text" class="form-control " v-model="credentials.email" placeholder="exemplo@exemplo.com.br">  
                                 <label class="form-label mt-2">Senha</label>    
@@ -32,6 +36,9 @@ export default {
         return{
             credentials:{
             nome:"",
+            dia:"",
+            mes:"",
+            ano:"",
             email:"",
             password:"",
             confirm_password:"",
@@ -42,7 +49,7 @@ export default {
         async create(){
             try{
                 if(this.password==this.confirm_password){
-                    await axios.post("api/users/", this.credentials);
+                    await axios.post("http://127.0.0.1:8000/usuarios", this.credentials);
                     this.$router.push("/");
 
                 }
