@@ -1,14 +1,8 @@
 from fastapi import APIRouter 
-from pydantic import BaseModel
-
 
 from .Sessao import Sessao
+from .integracao.DTOLoginRequest import DTOLoginRequest
 from .persistencia.InMemoryRepositorioUsuario import InMemoryRepositorioUsuario as RepositorioUsuario
-
-
-class LoginRequest(BaseModel):
-    email: str 
-    senha: str
 
 
 router = APIRouter(
@@ -23,7 +17,7 @@ def get_usuarios():
     return [u.dto() for u in encontrados]
 
 @router.post('/login')
-def login(dados: LoginRequest) -> dict:
+def login(dados: DTOLoginRequest) -> dict:
     print(f'{dados.email}, {dados.senha}')
     if dados.email == '' or dados.senha == '':
         return dict()
