@@ -5,7 +5,8 @@ from .integracao.DTOLoginRequest import DTOLoginRequest
 
 from .ServicoUsuario import ServicoUsuario
 from .persistencia.InMemoryRepositorioUsuario import InMemoryRepositorioUsuario as RepositorioUsuario
-from .integracao.DTOCriarUsuario import DTOCriarUsuario
+from .integracao.DTOsUsuariosRequest import DTOCriarUsuario, DTOAtualizarUsuario
+
 
 
 router = APIRouter(
@@ -37,6 +38,14 @@ def logout(email: str = '', token: str = ''):
 def todas_sessoes():
     return sessoes.todas()
 
+# Create
+@router.post('/')
+def cria_usuario(dados: DTOCriarUsuario):
+    return ServicoUsuario.criar(
+        dados.tipo, dados.nome, dados.ano_nascimento, dados.mes_nascimento, dados.dia_nascimento, dados.email, dados.senha
+    )
+
+# Read
 @router.get('/{id_usuario}')
 def get_dados_usuario(id_usuario: int):
     dto = dict()
@@ -45,9 +54,10 @@ def get_dados_usuario(id_usuario: int):
         dto = usuario.dto()
     return dto
 
-@router.post('/')
-def cria_usuario(dados: DTOCriarUsuario):
-    return ServicoUsuario.criar(
-        dados.tipo, dados.nome, dados.ano_nascimento, dados.mes_nascimento, dados.dia_nascimento, dados.email, dados.senha
+# Update
+@router.put('/{id_usuario}')
+def atualiza_usuario(id_usuario: int, dados: DTOAtualizarUsuario):
+    return ServicoUsuario.atualizar(
+        id_usuario, dados.tipo, dados.nome, dados.ano_nascimento, dados.mes_nascimento, dados.dia_nascimento, dados.email, dados.senha
     )
     
