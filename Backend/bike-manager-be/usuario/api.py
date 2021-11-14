@@ -30,7 +30,7 @@ def logout(email: str = '', token: str = ''):
 
     sessoes.logout(email, token)
 
-@router.get('/todas_sessoes')
+@router.get('/todas_sessoes')  # PARA DESENVOLVIMENTO, DELETAR DEPOIS
 def todas_sessoes():
     return sessoes.todas()
 
