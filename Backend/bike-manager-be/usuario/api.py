@@ -33,3 +33,11 @@ def logout(email: str = '', token: str = ''):
 @router.get('/todas_sessoes')
 def todas_sessoes():
     return sessoes.todas()
+
+@router.get('/{id_usuario}')
+def get_dados_usuario(id_usuario: int):
+    dto = dict()
+    usuario = RepositorioUsuario.find_one(id_usuario)
+    if usuario is not None:
+        dto = usuario.dto()
+    return dto
