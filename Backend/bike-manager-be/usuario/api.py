@@ -18,7 +18,6 @@ def get_usuarios():
 
 @router.post('/login')
 def login(dados: DTOLoginRequest) -> dict:
-    print(f'{dados.email}, {dados.senha}')
     if dados.email == '' or dados.senha == '':
         return dict()
 
