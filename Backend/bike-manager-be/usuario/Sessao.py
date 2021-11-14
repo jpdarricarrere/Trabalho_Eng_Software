@@ -1,7 +1,7 @@
 from collections import defaultdict
 import random
 
-from .persistencia.InMemoryRepositorioUsuario import InMemoryRepositorioUsuario as RepositorioUsuario
+from .ServicoUsuario import ServicoUsuario
 
 _TOKEN_SIZE = 12
 _ELEMENTOS = list('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
@@ -19,7 +19,7 @@ class Sessao:
 
     def login(self, email: str, senha: str) -> dict:
         dto = dict()
-        usuarios = RepositorioUsuario.get_all()     # TODO: adicionar um 'find_by_email' em RepositorioUsuario para evitar isso
+        usuarios = ServicoUsuario.listar_todos()     # TODO: adicionar um 'find_by_email' em RepositorioUsuario para evitar isso
         for usuario in usuarios:
             if usuario.get_email() == email and usuario.get_senha() == senha:
                 dto = usuario.dto()
