@@ -22,9 +22,13 @@ class InMemoryRepositorioUsuario(IRepositorioUsuario):
             usuario = _usuarios.get(id)
         return usuario
 
-    def save(usuario: Usuario):     # Pode ser tanto create (caso id == None) quanto update (caso tenha id existente)
+    def save(usuario: Usuario) -> Usuario:     # Pode ser tanto create (caso id == None) quanto update (caso tenha id existente)
         if usuario.get_id() == None:
             nova_id = len(_usuarios)
             usuario.set_id(nova_id)
         _usuarios[usuario.id] = usuario
         return usuario
+
+    def delete(id: int) -> None:
+        del _usuarios[id]
+    

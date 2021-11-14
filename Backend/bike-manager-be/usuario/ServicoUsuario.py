@@ -1,10 +1,14 @@
 from datetime import datetime
+from typing import Optional
 
 from .Usuario import Usuario
 from .TipoUsuario import TipoUsuario
 from .persistencia.InMemoryRepositorioUsuario import InMemoryRepositorioUsuario as RepositorioUsuario
 
 class ServicoUsuario:
+
+    def listar_todos() -> 'list[Usuario]':
+        return RepositorioUsuario.get_all()
     
     def criar(tipo: TipoUsuario, nome: str, ano_nascimento: int, mes_nascimento: int, dia_nascimento: int, email: str, senha: str):
         data_nascimento = datetime(ano_nascimento, mes_nascimento, dia_nascimento)
@@ -13,6 +17,9 @@ class ServicoUsuario:
         usuario_persistido = RepositorioUsuario.save(novo_usuario)
 
         return usuario_persistido
+
+    def encontrar(id: int) -> Optional[Usuario]:
+        return RepositorioUsuario.find_one(id)
 
     def atualizar(id: int, tipo: TipoUsuario, nome: str, ano_nascimento: int, mes_nascimento: int, dia_nascimento: int, email: str, senha: str):
         atual = RepositorioUsuario.find_one(id)
@@ -34,3 +41,7 @@ class ServicoUsuario:
         usuario_persistido = RepositorioUsuario.save(n_usuario)
 
         return usuario_persistido
+
+    def deletar(id: int):
+        RepositorioUsuario.delete(id)
+        

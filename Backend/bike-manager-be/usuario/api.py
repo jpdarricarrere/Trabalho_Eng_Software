@@ -4,7 +4,6 @@ from .Sessao import Sessao
 from .integracao.DTOLoginRequest import DTOLoginRequest
 
 from .ServicoUsuario import ServicoUsuario
-from .persistencia.InMemoryRepositorioUsuario import InMemoryRepositorioUsuario as RepositorioUsuario
 from .integracao.DTOsUsuariosRequest import DTOCriarUsuario, DTOAtualizarUsuario
 
 
@@ -17,7 +16,7 @@ sessoes = Sessao()
 
 @router.get("/")
 def get_usuarios():
-    encontrados = RepositorioUsuario.get_all()
+    encontrados = ServicoUsuario.listar_todos()
     return [u.dto() for u in encontrados]
 
 @router.post('/login')
@@ -49,7 +48,7 @@ def cria_usuario(dados: DTOCriarUsuario):
 @router.get('/{id_usuario}')
 def get_dados_usuario(id_usuario: int):
     dto = dict()
-    usuario = RepositorioUsuario.find_one(id_usuario)
+    usuario = ServicoUsuario.encontrar(id_usuario)
     if usuario is not None:
         dto = usuario.dto()
     return dto
@@ -61,3 +60,10 @@ def atualiza_usuario(id_usuario: int, dados: DTOAtualizarUsuario):
         id_usuario, dados.tipo, dados.nome, dados.ano_nascimento, dados.mes_nascimento, dados.dia_nascimento, dados.email, dados.senha
     )
     
+# Delete
+@router.delete('/{id_usuario}')
+def deleta_usuario(id_usuario: int):
+    usuario = ServicoUsuario.encontrar(id_usuario)
+    if usuario is not None:
+        sessoes.invalidar_todas_para_usuario(usuario.get_email())
+    return ServicoUsuario.deletar(id_usuario)

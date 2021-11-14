@@ -33,5 +33,9 @@ class Sessao:
     def logout(self, email: str, token: str):
         self._todas_sessoes[email].remove(token)
 
+    def invalidar_todas_para_usuario(self, email) -> None:
+        if email in self._todas_sessoes:
+            del self._todas_sessoes[email]
+
     def todas(self):  # Apenas para debug e desenvolvimento, deletar depois
         return self._todas_sessoes
