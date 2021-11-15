@@ -30,5 +30,6 @@ class InMemoryRepositorioUsuario(IRepositorioUsuario):
         return usuario
 
     def delete(id: int) -> None:
-        del _usuarios[id]
+        if id in _usuarios:
+            del _usuarios[id]
     
