@@ -26,7 +26,7 @@ class InMemoryRepositorioUsuario(IRepositorioUsuario):
         if usuario.get_id() == None:
             nova_id = len(_usuarios)
             usuario.set_id(nova_id)
-        _usuarios[usuario.id] = usuario
+        _usuarios[usuario.get_id()] = usuario
         return usuario
 
     def delete(id: int) -> None:
