@@ -1,6 +1,10 @@
 from fastapi import APIRouter
+
 from .TipoBike import TipoBike
 from .Bike import Bike
+
+from .integracao.DTOsBikesRequest import DTOCriarBike
+
 from .persistencia.InMemoryRepositorioBike import InMemoryRepositorioBike as RepositorioBike
 
 router = APIRouter(
@@ -14,9 +18,9 @@ def get_bikes(tipo: TipoBike = None, nome: str = "", modelo: str = "", marchas: 
     return encontradas
 
 # Create
-def cria_bike(id: int, nome: str, modelo: str, link_imagem: str, tipo: TipoBike, num_marchas: int, ano: int, aro: int, id_adm: int):
-
-    nova_bike = Bike(id, nome, modelo, link_imagem, False, False, tipo, num_marchas, ano, aro, id_adm)
+@router.post('/')
+def cria_bike(dados: DTOCriarBike):
+    nova_bike = Bike(None, dados.nome, dados.modelo, dados.link_imagem, False, False, dados.tipo, dados.num_marchas, dados.ano, dados.aro, dados.id_adm)
     bike_salva = RepositorioBike.save(nova_bike)
     return bike_salva
 
