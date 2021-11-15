@@ -51,8 +51,9 @@ def atualiza_bike(id_bike: int, dados: DTOAtualizarBike):
     return bike_persistida
 
 # Delete
-def deleta_bike(id: int):
-        RepositorioBike.delete(id)
+@router.delete('/{id_bike}')
+def deleta_bike(id_bike: int):
+        RepositorioBike.delete(id_bike)
 
 def aluga_bike(id:int):
     atual = RepositorioBike.find_one(id)

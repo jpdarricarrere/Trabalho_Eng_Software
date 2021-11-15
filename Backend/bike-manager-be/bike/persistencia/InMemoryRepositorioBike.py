@@ -57,5 +57,6 @@ class InMemoryRepositorioBike(IRepositorioBike):
         return bike
 
     def delete(id: int) -> None:
-        raise Exception("Metodo 'delete' nao implementado por RepositorioBike utilizado!")
+        if id in _bikes:
+            del _bikes[id]
 
