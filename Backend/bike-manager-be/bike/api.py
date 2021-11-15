@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from .TipoBike import TipoBike
 from .Bike import Bike
 
-from .integracao.DTOsBikesRequest import DTOCriarBike
+from .integracao.DTOsBikesRequest import DTOCriarBike, DTOAtualizarBike
 
 from .persistencia.InMemoryRepositorioBike import InMemoryRepositorioBike as RepositorioBike
 
@@ -31,18 +31,20 @@ def get_dados_bike(id_bike: int):
     return bike 
 
 # Update
-def atualiza_bike(id: int, nome: str, modelo: str, tipo: TipoBike, num_marchas: int, ano: int, aro: int):
-    atual = RepositorioBike.find_one(id)
+@router.put('/{id_bike}')
+def atualiza_bike(id_bike: int, dados: DTOAtualizarBike):
+    atual = RepositorioBike.find_one(id_bike)
 
-    n_modelo = modelo if modelo is not None else atual.modelo 
-    n_nome = nome if nome is not None else atual.nome 
-    n_tipo = tipo if tipo is not None else atual.tipo
-    n_tipo = tipo if tipo is not None else atual.tipo
-    n_num_marchas = num_marchas if num_marchas is not None else atual.num_marchas
-    n_ano = ano if ano is not None else atual.ano
-    n_aro = aro if aro is not None else atual.aro
+    n_nome = dados.nome if dados.nome is not None else atual.nome 
+    n_modelo = dados.modelo if dados.modelo is not None else atual.modelo 
+    n_link_imagem = dados.link_imagem if dados.link_imagem is not None else atual.link_imagem
+    n_tipo = dados.tipo if dados.tipo is not None else atual.tipo
+    n_num_marchas = dados.num_marchas if dados.num_marchas is not None else atual.num_marchas
+    n_ano = dados.ano if dados.ano is not None else atual.ano
+    n_aro = dados.aro if dados.aro is not None else atual.aro
+    n_id_adm = dados.id_adm if dados.id_adm is not None else atual.id_adm
 
-    n_bike = Bike(id, n_nome, n_modelo, atual.link_imagem, atual.alugada, atual.em_manutencao, n_tipo, n_num_marchas, n_ano, n_aro, atual.id_adm)
+    n_bike = Bike(id_bike, n_nome, n_modelo, n_link_imagem, atual.alugada, atual.em_manutencao, n_tipo, n_num_marchas, n_ano, n_aro, n_id_adm)
 
     bike_persistida = RepositorioBike.save(n_bike)
 

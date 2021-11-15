@@ -12,3 +12,13 @@ class DTOCriarBike(BaseModel):
     aro: int 
     id_adm: int 
 
+class DTOAtualizarBike(BaseModel):
+    nome: Optional[str]
+    modelo: Optional[str]
+    link_imagem: Optional[str]
+    tipo: Optional[TipoBike]
+    num_marchas: Optional[int]
+    ano: Optional[int] 
+    aro: Optional[int] 
+    id_adm: Optional[int] 
+
