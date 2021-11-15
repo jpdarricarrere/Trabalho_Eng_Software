@@ -11,7 +11,8 @@ from .persistencia.InMemoryRepositorioBike import InMemoryRepositorioBike as Rep
 servico = ServicoBike()
 
 router = APIRouter(
-    prefix="/bikes"
+    prefix="/bikes",
+    tags=['bikes']
 ) 
 
 @router.get("/")

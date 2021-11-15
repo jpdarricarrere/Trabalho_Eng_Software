@@ -9,7 +9,8 @@ from .integracao.DTOsUsuariosRequest import DTOCriarUsuario, DTOAtualizarUsuario
 
 
 router = APIRouter(
-    prefix = '/usuarios'
+    prefix = '/usuarios',
+    tags = ["usuarios"]
 )
 
 sessoes = Sessao()

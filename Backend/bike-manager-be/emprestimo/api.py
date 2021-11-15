@@ -5,7 +5,8 @@ from .ServicoEmprestimo import ServicoEmprestimo
 servico = ServicoEmprestimo()
 
 router = APIRouter(
-    prefix = '/emprestimos'
+    prefix = '/emprestimos',
+    tags = ["emprestimos"]
 )
 
 @router.get('/reserva/{id_bike}')
