@@ -2,10 +2,13 @@ from fastapi import APIRouter
 
 from .TipoBike import TipoBike
 from .Bike import Bike
+from .ServicoBike import ServicoBike
 
 from .integracao.DTOsBikesRequest import DTOCriarBike, DTOAtualizarBike
 
 from .persistencia.InMemoryRepositorioBike import InMemoryRepositorioBike as RepositorioBike
+
+servico = ServicoBike()
 
 router = APIRouter(
     prefix="/bikes"
@@ -55,39 +58,5 @@ def atualiza_bike(id_bike: int, dados: DTOAtualizarBike):
 def deleta_bike(id_bike: int):
         RepositorioBike.delete(id_bike)
 
-def aluga_bike(id:int):
-    atual = RepositorioBike.find_one(id)
-
-    if atual.alugada is True or atual.em_manutencao is True:
-        #o que vai ser definido aqui? msg de erro? tratamento de caso especial?
-        return None
-
-    atual.alugada = True
-    bike_persistida = RepositorioBike.save(atual)
-    return bike_persistida
-
-def desaluga_bike(id:int):
-    atual = RepositorioBike.find_one(id)
-    atual.alugada = False
-    bike_persistida = RepositorioBike.save(atual)
-    
-    return bike_persistida
-
-def manutencao_bike(id:int):
-    atual = RepositorioBike.find_one(id)
-
-    if atual.alugada is True:
-        return None
-
-    atual.em_manutencao = True
-    bike_persistida = RepositorioBike.save(atual)   
-    return bike_persistida
-
-def desmanutencao_bike(id:int):
-    atual = RepositorioBike.find_one(id)
-        
-    atual.em_manutencao = False
-    bike_persistida = RepositorioBike.save(atual) 
-    return bike_persistida
 
     
