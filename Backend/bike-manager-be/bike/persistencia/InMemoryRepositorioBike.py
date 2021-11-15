@@ -1,9 +1,11 @@
+from typing import Optional
+
 from ..Bike import Bike 
 from ..TipoBike import TipoBike
 from .IRepositorioBike import IRepositorioBike
 
 # Dicionario mapeado pela id da bicicleta
-_all_bikes = {
+_bikes = {
     1: Bike(id=1, nome="Bicicleta 1", modelo="Modelo1", link_imagem="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg", alugada=False, em_manutencao=False, tipo=TipoBike.urbana, num_marchas=5, ano=2020, aro=7, id_adm=1),
     2: Bike(id=2, nome="Bicicleta 2", modelo="Modelo2", link_imagem="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg", alugada=False, em_manutencao=True, tipo=TipoBike.transporte, num_marchas=4, ano=2017, aro=6, id_adm=1),
     3: Bike(id=3, nome="Bicicleta 3", modelo="Modelo3", link_imagem="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg", alugada=True, em_manutencao=False, tipo=TipoBike.urbana, num_marchas=6, ano=2021, aro=5, id_adm=1),
@@ -16,13 +18,13 @@ _all_bikes = {
     10: Bike(id=10, nome="Bicicleta 10", modelo="Modelo10", link_imagem="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg", alugada=True, em_manutencao=False, tipo=TipoBike.corrida, num_marchas=5, ano=2021, aro=5, id_adm=1),
 }
 
-class MockRepositorioBike(IRepositorioBike):
+class InMemoryRepositorioBike(IRepositorioBike):
 
     def get_all():
-        return list(_all_bikes.values())[:]
+        return list(_bikes.values())[:]
     
     def find(tipo: TipoBike, nome: str, modelo: str, marchas: int, aro: int):
-        encontradas = list(_all_bikes.values())[:]
+        encontradas = list(_bikes.values())[:]
 
         if nome != '':
             encontradas = [bike for bike in encontradas if nome in bike.get_nome()]
@@ -40,3 +42,16 @@ class MockRepositorioBike(IRepositorioBike):
             encontradas = [bike for bike in encontradas if bike.get_aro() == aro]
 
         return encontradas 
+
+    def find_one(id: int) -> Optional[Bike]:
+        bike = None 
+        if id in _bikes:
+            bike = _bikes.get(id)
+        return bike
+
+    def save(bike: Bike) -> Bike:
+        raise Exception("Metodo 'save' nao implementado por RepositorioBike utilizado!")
+
+    def delete(id: int) -> None:
+        raise Exception("Metodo 'delete' nao implementado por RepositorioBike utilizado!")
+
