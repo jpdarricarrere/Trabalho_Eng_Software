@@ -5,7 +5,7 @@
                 <div class="card">
                     <img src="../assets/logo-bike-nome.png"  alt="Logo-rike" />
                     <div class="card-body mt-2">
-                        <form action="" autocomplete="off">
+                        <form @submit="login" autocomplete="off">
                             <label class="form-label mt-2">Email</label>
                                 <input type="text" class="form-control " v-model="credentials.email">                            
                                 <label class="form-label mt-2">Password</label>

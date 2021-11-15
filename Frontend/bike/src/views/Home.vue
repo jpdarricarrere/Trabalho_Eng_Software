@@ -16,7 +16,7 @@
                 descrição da bike</p>
             
             <div slot="footer">
-                <b-btn type="button" href="/payment" variant="primary" block>Alugue</b-btn>
+                <b-btn type="button"  variant="primary"  @click="selectBike">Alugue</b-btn>
             </div>
         </b-card>
     </b-card-group>
@@ -44,6 +44,7 @@ export default {
     return {
       search: "",
       bikes: [],
+      teste:""
     };
   },
   async created() {
@@ -65,15 +66,19 @@ export default {
         return c;
       }, []);
     },
-/*
+
     searchBikes() {
       return this.$refs.search.search_return();
     },
-    */
+    
   },
+  
   methods:{
     updateSearch(variable){
       this.search = variable;
+    },
+    selectBike(){
+      console.log(this.bike.nome)
     }
   }
 };
