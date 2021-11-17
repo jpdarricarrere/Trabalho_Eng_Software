@@ -1,22 +1,38 @@
 <template>
 <div>
-  <Navbar @inputData="updateSearch" />
+  <Navbar @inputData="updateSearch(search)" />
+
+  <ul >
+     <form class="text">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Pesquisar pelo nome ou modelo..."
+          v-model="search" @keyup.enter="submit"
+        />       
+      </form>
+
+    </ul>
   
         <!-- img-src so pega imagens com url -->
   <div class="col d-flex justify-content-center ">
        
     <b-row>
-    <b-card-group class="col-md-3" v-for="bike in filteredBikes" v-bind:key="bike">
+    <b-card-group class="col-md-3" v-for="bike in filteredBikes" :key="bike.id">
         <b-card 
-                v-bind:title= "bike.nome"
-                v-bind:img-src=  "bike.link_imagem"
+                :title= "bike.nome"
+                :img-src= "bike.link_imagem"
                 img-alt="Img"
                 img-top>
             <p class="card-text">
-                descrição da bike</p>
+                <ul><li>Tipo: {{bike.tipo}}</li>
+                <li>Ano: {{bike.ano}}</li>
+                <li>Aro: {{bike.aro}}</li> 
+                <li>Marchas: {{bike.num_marchas}}</li></ul>
+                </p>
             
             <div slot="footer">
-                <b-btn type="button"  variant="primary"  @click="selectBike">Alugue</b-btn>
+                <b-btn type="button"  variant="primary"  @click="selectBike(bike.id)">Alugue</b-btn>
             </div>
         </b-card>
     </b-card-group>
@@ -77,8 +93,10 @@ export default {
     updateSearch(variable){
       this.search = variable;
     },
-    selectBike(){
-      console.log(this.bike.nome)
+    async selectBike(id){
+      console.log(id)
+      await axios.get("http://127.0.0.1:8000/emprestimos/reserva/{id_da_bike}",id)
+            .then(response => (console.log(response)))
     }
   }
 };

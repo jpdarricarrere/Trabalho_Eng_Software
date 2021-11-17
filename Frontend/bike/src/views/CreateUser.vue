@@ -1,5 +1,6 @@
 <template>
-<div class="container">
+<div><Navbar/><div class="container">
+    
         <div class="row justify-content-center " style="height:100vh">
             <div class="col-4">
                 <div class="card">
@@ -25,13 +26,17 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div></div>
+
 </template>
 <script>
 import axios from "axios";
-
+import Navbar from "../components/Navbar.vue";
 export default {
     name: "Create",
+    components: {
+    Navbar, 
+  },
     data(){
         return{
             credentials:{

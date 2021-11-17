@@ -1,4 +1,6 @@
 <template>
+<div>
+<Navbar/>
 <div class="container">
         <div class="row justify-content-center align-items-center" style="height:100vh">
             <div class="col-4">
@@ -20,12 +22,20 @@
             </div>
         </div>
     </div>
+
+</div>
+
 </template>
 
 <script>
 import axios from "axios";
+import Navbar from "../components/Navbar.vue";
 export default {
+    components:{
+            Navbar
+        },
     data(){
+        
         return{
             credentials:{
                 email:"",

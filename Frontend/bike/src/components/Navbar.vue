@@ -6,7 +6,7 @@
       </a>
     </ul>
 
-    <ul class="navbar-nav">
+    <!--<ul class="navbar-nav">
      <form class="text">
         <input
           class="form-control"
@@ -16,8 +16,17 @@
         />       
       </form>
 
+    </ul>-->
+    <ul class="navbar-nav">
+       <li class="nav-item me-3">
+           <router-link to="/home" active-class="active" class="nav-link" exact>
+           <a class="nav-link text-primary fw-bolder" href="#">
+               <b-icon-house-fill></b-icon-house-fill>
+               <i>Home</i>
+           </a>
+           </router-link>
+        </li> 
     </ul>
-    
     <ul class="navbar-nav">
        <li class="nav-item me-3">
            <router-link to="/login" active-class="active" class="nav-link" exact>
@@ -38,6 +47,7 @@
            
         </li> 
     </ul>
+    
   </nav>
 </template>
 <script>

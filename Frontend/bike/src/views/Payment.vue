@@ -63,8 +63,8 @@ export default {
     },
     methods:{
         async pay(){
-            await axios.put("http//localhost:8000"); //passar pra atualizar o bool de bike alugada
-            await axios.push("/");
+            await axios.get("http//localhost:8000/emprestimos/reserva/{id_da_bike}",this.id_da_bike)
+            .then(response => (console.log(response)))
         }
     }
 
