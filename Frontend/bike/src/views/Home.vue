@@ -32,7 +32,7 @@
                 </p>
             
             <div slot="footer">
-                <b-btn type="button"  variant="primary"  @click="selectBike(bike.id)">Alugue</b-btn>
+                <b-btn :id="bike.id" type="button" :disabled="bike.alugada == true" variant="primary"  @click="selectBike(bike.id)">Alugue</b-btn>
             </div>
         </b-card>
     </b-card-group>
@@ -94,12 +94,14 @@ export default {
       this.search = variable;
     },
     async selectBike(id){
-      console.log(id)
-      await axios.get("http://127.0.0.1:8000/emprestimos/reserva/{id_da_bike}",id)
+      document.getElementById(id).disabled = true;
+      await axios.get("http://127.0.0.1:8000/emprestimos/reserva/" + id,id)
             .then(response => (console.log(response)))
     }
   }
 };
+
+
 </script>
 
 <style>
