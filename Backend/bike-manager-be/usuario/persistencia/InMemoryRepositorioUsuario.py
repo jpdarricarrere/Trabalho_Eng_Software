@@ -9,6 +9,7 @@ _usuarios = {
     0: Usuario(0, TipoUsuario.ADMIN, "Admin1", datetime(1971, 1, 1), "adm1@bikes.com", "12345"),
     1: Usuario(1, TipoUsuario.ENTREGADOR, "Entregador1", datetime(1990, 12, 31), "entregador1@bikes.com", "senha"),
     2: Usuario(2, TipoUsuario.CLIENTE, "Cliente1", datetime(2000, 5, 12), "cliente1@bikes.com", "12052000"),
+    3: Usuario(3, TipoUsuario.CLIENTE, "Joao da Silva", datetime(2000, 5, 12), "joao@email.com", "123"),
 }
 
 class InMemoryRepositorioUsuario(IRepositorioUsuario):
