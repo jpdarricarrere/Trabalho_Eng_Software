@@ -94,9 +94,13 @@ export default {
       this.search = variable;
     },
     async selectBike(id){
-      document.getElementById(id).disabled = true;
-      await axios.get("http://127.0.0.1:8000/emprestimos/reserva/" + id,id)
-            .then(response => (console.log(response)))
+      if (localStorage.getItem("_bikesystem_cliente_id") == null) {
+        this.$router.push("/login");
+      } else {
+        document.getElementById(id).disabled = true;
+        await axios.get("http://127.0.0.1:8000/emprestimos/reserva/" + id,id)
+              .then(response => (console.log(response)))
+      }
     }
   }
 };

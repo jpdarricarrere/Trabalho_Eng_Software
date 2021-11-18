@@ -18,62 +18,61 @@
 
     </ul>-->
     <ul class="navbar-nav">
-       <li class="nav-item me-3">
-           <router-link to="/home" active-class="active" class="nav-link" exact>
-           <a class="nav-link text-primary fw-bolder" href="#">
-               <b-icon-house-fill></b-icon-house-fill>
-               <i>Home</i>
-           </a>
-           </router-link>
-        </li> 
+      <li class="nav-item me-3">
+        <router-link to="/home" active-class="active" class="nav-link" exact>
+          <a class="nav-link text-primary fw-bolder" href="#">
+            <b-icon-house-fill></b-icon-house-fill>
+            <i>Home</i>
+          </a>
+        </router-link>
+      </li>
     </ul>
     <ul class="navbar-nav">
-       <li class="nav-item me-3">
-           <router-link to="/login" active-class="active" class="nav-link" exact>
-           <a class="nav-link text-primary fw-bolder" href="#">
-               <b-icon-person-fill></b-icon-person-fill>
-               <i>Login</i>
-           </a>
-           </router-link>
-        </li> 
+      <li class="nav-item me-3">
+        <router-link to="/login" active-class="active" class="nav-link" exact>
+          <a class="nav-link text-primary fw-bolder" href="#">
+            <b-icon-person-fill></b-icon-person-fill>
+            <i>{{ cliente_nome == null ? "Login" : cliente_nome }}</i>
+          </a>
+        </router-link>
+      </li>
     </ul>
     <ul class="navbar-nav">
-       <li class="nav-item me-3">
-           
-           <a class="nav-link text-primary fw-bolder" href="#" @click="logout">
-               <b-icon-door-open-fill></b-icon-door-open-fill>
-               <i>Logout</i>
-           </a>
-           
-        </li> 
+      <li class="nav-item me-3">
+        <a class="nav-link text-primary fw-bolder" href="#" @click="logout">
+          <b-icon-door-open-fill></b-icon-door-open-fill>
+          <i>Logout</i>
+        </a>
+      </li>
     </ul>
-    
   </nav>
 </template>
 <script>
-import axios from "axios";
 export default {
   name: "Login",
   components: {},
   data() {
     return {
-        search:""
+      search: "",
+      cliente_id: localStorage.getItem("_bikesystem_cliente_id"),
+      cliente_nome: localStorage.getItem("_bikesystem_cliente_nome"),
     };
   },
   methods: {
     async logout() {
       /* Faz a partde de deslogar com o autenticador*/
-      await axios.delete(/*caminho do back */);
+      localStorage.removeItem("_bikesystem_cliente_id");
+      localStorage.removeItem("_bikesystem_cliente_nome");
       this.$router.push("/login");
     },
-    submit: function() {
+    submit: function () {
       this.$emit("inputData", this.tempMessage);
       this.tempMessage = "";
-    }
+    },
   },
 };
 </script>
-<style >
+<style>
 .navbar-nav .nav-link.active {
   border-bottom: 0.125rem solid $primary;
 }
