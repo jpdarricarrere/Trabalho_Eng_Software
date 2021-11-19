@@ -16,6 +16,7 @@ _bikes = {
     7: Bike(id=7, nome="Bicicleta 7", modelo="Modelo7", link_imagem="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg", alugada=True, em_manutencao=False, tipo=TipoBike.corrida, num_marchas=4, ano=2018, aro=6, id_adm=1),
     8: Bike(id=8, nome="Bicicleta 8", modelo="Modelo8", link_imagem="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg", alugada=True, em_manutencao=False, tipo=TipoBike.corrida, num_marchas=4, ano=2020, aro=7, id_adm=1),
     9: Bike(id=9, nome="Bicicleta 9", modelo="Modelo9", link_imagem="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg", alugada=True, em_manutencao=False, tipo=TipoBike.corrida, num_marchas=5, ano=2021, aro=5, id_adm=1),
+    10: Bike(id=10, nome="Bicicleta 10", modelo="Modelo10", link_imagem="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg", alugada=True, em_manutencao=False, tipo=TipoBike.corrida, num_marchas=7, ano=2019, aro=6, id_adm=1),
 }
 
 class InMemoryRepositorioBike(IRepositorioBike):
