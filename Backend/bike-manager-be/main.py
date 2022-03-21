@@ -1,10 +1,10 @@
-from fastapi import FastAPI 
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from bike.api import router as bike_router, servico as servico_bike
+from trabalhador.api import router as bike_router, servico as servico_bike
 from usuario.api import router as usuario_router
 from emprestimo.api import router as emprestimo_router, servico as servico_emprestimo
 
-app = FastAPI() 
+app = FastAPI()
 origins = ["*"]
 
 app.add_middleware(
@@ -19,6 +19,7 @@ app.include_router(bike_router)
 app.include_router(usuario_router)
 app.include_router(emprestimo_router)
 
+
 @app.get("/")
 def server_status_index():
     return {"Status": "It lives!"}
@@ -26,4 +27,3 @@ def server_status_index():
 
 # Injecao de dependencias
 servico_emprestimo.set_servico_bike(servico_bike)
-
