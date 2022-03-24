@@ -1,9 +1,9 @@
 from pydantic import BaseModel
 from typing import Optional
-from ..TipoTrabalhador import TipoTrabalhador
+from ..TipoServico import TipoServico
 
 
-class DTOCriarTrabalhador(BaseModel):
+class DTOCriarServico(BaseModel):
     nome: str
     telefone: str
     email: str
@@ -12,7 +12,7 @@ class DTOCriarTrabalhador(BaseModel):
     contratado: bool
 
 
-class DTOAtualizarTrabalhador(BaseModel):
+class DTOAtualizarServico(BaseModel):
     nome: Optional[str]
     telefone: Optional[str]
     email: Optional[str]

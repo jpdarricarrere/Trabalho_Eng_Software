@@ -1,36 +1,36 @@
 from fastapi import APIRouter
 
-from .TipoTrabalhador import TipoTrabalhador
-from .Trabalhador import Trabalhador
-from .ContrataTrabalhador import ContrataTrabalhador
+from .TipoServico import TipoServico
+from .Servico import Servico
+from .ContrataServico import ContrataServico
 
-from .integracao.DTOsBikesRequest import DTOCriarTrabalhador, DTOAtualizarTrabalhador
+from .integracao.DTOsBikesRequest import DTOCriarServico, DTOAtualizarServico
 
-from .persistencia.InMemoryRepositorioTrabalhador import InMemoryRepositorioTrabalhador
+from .persistencia.InMemoryRepositorioServico import InMemoryRepositorioServico
 
-servico = ContrataTrabalhador()
+servico = ContrataServico()
 
 router = APIRouter(
-    prefix="/trabalhadores",
-    tags=['trabalhadores']
+    prefix="/servicos",
+    tags=['servicos']
 )
 
 
 @router.get("/")
-def get_trabalhadores(
+def get_servicos(
     categoria: str = "",
 ):
     print(
         f'Processando pesquisa por categoria: {categoria}')
-    encontrados = InMemoryRepositorioTrabalhador.find(categoria)
+    encontrados = InMemoryRepositorioServico.find(categoria)
     return encontrados
 
 # Create
 
 
 @router.post('/')
-def cria_trabalhador(dados: DTOCriarTrabalhador):
-    novo_trabalhador = Trabalhador(
+def cria_servico(dados: DTOCriarServico):
+    novo_servico = Servico(
         None,
         dados.nome,
         dados.telefone,
@@ -39,23 +39,23 @@ def cria_trabalhador(dados: DTOCriarTrabalhador):
         dados.link_imagem,
         False,
     )
-    trabalhador_salvo = InMemoryRepositorioTrabalhador.save(novo_trabalhador)
-    return trabalhador_salvo
+    servico_salvo = InMemoryRepositorioServico.save(novo_servico)
+    return servico_salvo
 
 # Read
 
 
 @router.get('/{id_bike}')
 def get_dados_bike(id_bike: int):
-    bike = InMemoryRepositorioTrabalhador.find_one(id_bike)
+    bike = InMemoryRepositorioServico.find_one(id_bike)
     return bike
 
 # Update
 
 
 @router.put('/{id_bike}')
-def atualiza_bike(id_bike: int, dados: DTOAtualizarTrabalhador):
-    atual = InMemoryRepositorioTrabalhador.find_one(id_bike)
+def atualiza_bike(id_bike: int, dados: DTOAtualizarServico):
+    atual = InMemoryRepositorioServico.find_one(id_bike)
 
     n_nome = dados.nome if dados.nome is not None else atual.nome
     n_telefone = dados.telefone if dados.telefone is not None else atual.telefone
@@ -63,7 +63,7 @@ def atualiza_bike(id_bike: int, dados: DTOAtualizarTrabalhador):
     n_categoria = dados.categoria if dados.categoria is not None else atual.categoria
     n_link_imagem = dados.link_imagem if dados.link_imagem is not None else atual.link_imagem
 
-    n_trabalhador = Trabalhador(
+    n_servico = Servico(
         id_bike,
         n_nome,
         n_telefone,
@@ -73,13 +73,13 @@ def atualiza_bike(id_bike: int, dados: DTOAtualizarTrabalhador):
         atual.contratado,
     )
 
-    trabalhador_persistido = InMemoryRepositorioTrabalhador.save(n_trabalhador)
+    servico_persistido = InMemoryRepositorioServico.save(n_servico)
 
-    return trabalhador_persistido
+    return servico_persistido
 
 # Delete
 
 
 @router.delete('/{id_bike}')
 def deleta_bike(id_bike: int):
-    InMemoryRepositorioTrabalhador.delete(id_bike)
+    InMemoryRepositorioServico.delete(id_bike)

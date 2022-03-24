@@ -18,21 +18,24 @@
   <div class="col d-flex justify-content-center ">
        
     <b-row>
-    <b-card-group class="col-md-3" v-for="trabalhador in filteredTrabalhadores" :key="trabalhador.id">
+    <b-card-group class="col-md-3" v-for="servico in filteredServicos" :key="servico.id">
         <b-card 
-                :title= "bike.nome"
-                :img-src= "bike.link_imagem"
+                :title= "servico.nome"
+                :img-src= "servico.link_imagem"
                 img-alt="Img"
                 img-top>
             <p class="card-text">
-                <ul><li>Tipo: {{bike.tipo}}</li>
-                <li>Ano: {{bike.ano}}</li>
-                <li>Aro: {{bike.aro}}</li> 
-                <li>Marchas: {{bike.num_marchas}}</li></ul>
-                </p>
+                <ul>
+                  <!-- <li>Tipo: {{servico.tipo}}</li> -->
+                  <!-- <li>Ano: {{servico.ano}}</li> -->
+                  <!-- <li>Aro: {{servico.aro}}</li>  -->
+                  <!-- <li>Marchas: {{servico.num_marchas}}</li> -->
+                </ul>
+            </p>
             
             <div slot="footer">
-                <b-btn :id="bike.id" type="button" :disabled="bike.contratado == true" variant="primary"  @click="selectBike(bike.id)">Alugue</b-btn>
+                <!-- <b-btn :id="servico.id" type="button" :disabled="servico.contratado == true" variant="primary"  @click="selectBike(bike.id)">Alugue</b-btn> -->
+                <b-btn :id="servico.id" type="button" variant="primary">Alugue</b-btn>
             </div>
         </b-card>
     </b-card-group>
@@ -58,31 +61,31 @@ export default {
   data() {
     return {
       search: "",
-      trabalhadores: [],
+      servicos: [],
       teste:""
     };
   },
   async created() {
     await axios
-      .get("http://127.0.0.1:8000/trabalhadores")
-      .then((response) => (this.trabalhadores = response.data))
+      .get("http://127.0.0.1:8000/servicos")
+      .then((response) => (this.servicos = response.data))
       .catch((error) => console.log(error));
   },
   computed: {
-    filteredTrabalhadores: function () {
-      return this.trabalhadores.filter((trabalhadores) => {
-        return trabalhadores.nome.match(this.search) !== null;
+    filteredServicos: function () {
+      return this.servicos.filter((servicos) => {
+        return servicos.nome.match(this.search) !== null;
       });
     },
-    formattedTrabalhadores() {
-      return this.trabalhadores.reduce((c, n, i) => {
+    formattedServicos() {
+      return this.servicos.reduce((c, n, i) => {
         if (i % 4 === 0) c.push([]);
         c[c.length - 1].push(n);
         return c;
       }, []);
     },
 
-    searchTrabalhadores() {
+    searchServicos() {
       return this.$refs.search.search_return();
     },
     

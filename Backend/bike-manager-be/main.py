@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from trabalhador.api import router as bike_router, servico as servico_bike
+from servico.api import router as bike_router, servico as servico_bike
 from usuario.api import router as usuario_router
 from emprestimo.api import router as emprestimo_router, servico as servico_emprestimo
 

@@ -36,8 +36,8 @@ export default {
   data() {
     return {
       search: "",
-      cliente_id: localStorage.getItem("_bikesystem_cliente_id"),
-      cliente_nome: localStorage.getItem("_bikesystem_cliente_nome"),
+      // cliente_id: localStorage.getItem("_bikesystem_cliente_id"),
+      // cliente_nome: localStorage.getItem("_bikesystem_cliente_nome"),
     };
   },
   methods: {

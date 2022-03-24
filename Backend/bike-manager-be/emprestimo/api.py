@@ -11,5 +11,5 @@ router = APIRouter(
 
 
 @router.get('/reserva/{id}')
-def contrata_trabalhador(id: int):
-    return servico.contrata_trabalhador(id)
+def contrata_servico(id: int):
+    return servico.contrata_servico(id)

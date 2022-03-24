@@ -1,12 +1,12 @@
 from typing import Optional
 
-from ..Trabalhador import Trabalhador
-from ..TipoTrabalhador import TipoTrabalhador
-from .IRepositorioTrabalhador import IRepositorioTrabalhador
+from ..Servico import Servico
+from ..TipoServico import TipoServico
+from .IRepositorioServico import IRepositorioServico
 
 # Dicionario mapeado pela id da bicicleta
-_trabalhadores = {
-    0: Trabalhador(
+_servicos = {
+    0: Servico(
         id=0,
         nome="Joao",
         categoria="Eletricista",
@@ -15,7 +15,7 @@ _trabalhadores = {
         link_imagem="https://irp-cdn.multiscreensite.com/0c02236a/dms3rep/multi/ep%2Bver.jpeg",
         contratado=False,
     ),
-    1: Trabalhador(
+    1: Servico(
         id=1,
         nome="Rafael",
         categoria="Pedreiro",
@@ -24,7 +24,7 @@ _trabalhadores = {
         link_imagem="https://st.depositphotos.com/1000291/3330/i/600/depositphotos_33303707-stock-photo-construction-mason-worker-bricklayer.jpg",
         contratado=False,
     ),
-    2: Trabalhador(
+    2: Servico(
         id=2,
         nome="Pedro",
         categoria="Padeiro",
@@ -33,7 +33,7 @@ _trabalhadores = {
         link_imagem="https://conteudo.imguol.com.br/c/bol/entretenimento/ca/2016/07/07/8jul2016---padeiro-mario-francisco-dos-santos-exibe-uma-de-suas-delicias-preparadas-na-padaria-santa-tereza-no-centro-de-sao-paulo-1467941686800_300x420.jpg",
         contratado=False,
     ),
-    3: Trabalhador(
+    3: Servico(
         id=3,
         nome="Vitor",
         categoria="Mecanico",
@@ -42,7 +42,7 @@ _trabalhadores = {
         link_imagem="https://sprintec.com.br/wp-content/uploads/2020/11/20-de-dezembro-e-comemorado-o-dia-do-mecanico-5497fef78b4b42b3ce1d80e2eaec919a.jpg",
         contratado=False,
     ),
-    4: Trabalhador(
+    4: Servico(
         id=4,
         nome="Marthyna",
         categoria="Encanador",
@@ -51,7 +51,7 @@ _trabalhadores = {
         link_imagem="https://certificadocursosonline.com/wp-content/uploads/2019/09/curso-de-encanador.jpg",
         contratado=False,
     ),
-    5: Trabalhador(
+    5: Servico(
         id=5,
         nome="Jose",
         categoria="Seguranca",
@@ -60,7 +60,7 @@ _trabalhadores = {
         link_imagem="https://www.verzani.com.br/wp-content/uploads/2021/05/banner-seguranca@2x-1024x504.jpg",
         contratado=False,
     ),
-    6: Trabalhador(
+    6: Servico(
         id=6,
         nome="Maria",
         categoria="Jardineiro",
@@ -69,7 +69,7 @@ _trabalhadores = {
         link_imagem="https://russelservicos.com.br/wp-content/uploads/2016/01/jardineiro-hotelaria_2.jpg",
         contratado=False,
     ),
-    7: Trabalhador(
+    7: Servico(
         id=7,
         nome="Lucas",
         categoria="Domestico",
@@ -78,7 +78,7 @@ _trabalhadores = {
         link_imagem="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg",
         contratado=False,
     ),
-    8: Trabalhador(
+    8: Servico(
         id=8,
         nome="Renata",
         categoria="Motorista",
@@ -87,7 +87,7 @@ _trabalhadores = {
         link_imagem="https://licencesolucoes.com.br/wp-content/uploads/2021/08/como-se-tornar-motorista-de-aplicativo.jpeg",
         contratado=False,
     ),
-    9: Trabalhador(
+    9: Servico(
         id=9,
         nome="Laura",
         categoria="Cuidador",
@@ -96,7 +96,7 @@ _trabalhadores = {
         link_imagem="https://d2ul2exfru69gk.cloudfront.net/Custom/Content/Products/13/16/13163_bicicleta-nova-specialized-epic-ht-carbon-29-2020-37241_z4_637288976190418780.jpg",
         contratado=False,
     ),
-    10: Trabalhador(
+    10: Servico(
         id=10,
         nome="Renato",
         categoria="Enfermeiro",
@@ -108,13 +108,13 @@ _trabalhadores = {
 }
 
 
-class InMemoryRepositorioTrabalhador(IRepositorioTrabalhador):
+class InMemoryRepositorioServico(IRepositorioServico):
 
     def get_all():
-        return list(_trabalhadores.values())[:]
+        return list(_servicos.values())[:]
 
     def find(categoria: str):
-        encontrados = list(_trabalhadores.values())[:]
+        encontrados = list(_servicos.values())[:]
 
         if categoria != '':
             encontrados = [
@@ -122,19 +122,19 @@ class InMemoryRepositorioTrabalhador(IRepositorioTrabalhador):
 
         return encontrados
 
-    def find_one(id: int) -> Optional[Trabalhador]:
+    def find_one(id: int) -> Optional[Servico]:
         bike = None
-        if id in _trabalhadores:
-            bike = _trabalhadores.get(id)
+        if id in _servicos:
+            bike = _servicos.get(id)
         return bike
 
-    def save(bike: Trabalhador) -> Trabalhador:
+    def save(bike: Servico) -> Servico:
         if bike.get_id() == None:
-            nova_id = len(_trabalhadores)
+            nova_id = len(_servicos)
             bike.set_id(nova_id)
-        _trabalhadores[bike.get_id()] = bike
+        _servicos[bike.get_id()] = bike
         return bike
 
     def delete(id: int) -> None:
-        if id in _trabalhadores:
-            del _trabalhadores[id]
+        if id in _servicos:
+            del _servicos[id]

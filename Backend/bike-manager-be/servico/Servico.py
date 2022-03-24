@@ -1,7 +1,7 @@
-from .TipoTrabalhador import TipoTrabalhador
+from .TipoServico import TipoServico
 
 
-class Trabalhador:
+class Servico:
 
     def __init__(
         self,
