@@ -1,55 +1,26 @@
 <template>
 <div>
-  <Navbar @inputData="updateSearch(search)" />
+  <Navbar @inputData="updateSearch" />
 
-  <ul >
-     <form class="text">
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Pesquisar pelo nome ou modelo..."
-          v-model="search" @keyup.enter="submit"
-        />       
-      </form>
-
-    </ul>
-  
-        <!-- img-src so pega imagens com url -->
-  <div class="col d-flex justify-content-center ">
-       
-    <b-row>
-    <b-card-group class="col-md-3" v-for="servico in filteredServicos" :key="servico.id">
-        <b-card 
-                :title= "servico.nome"
-                :img-src= "servico.link_imagem"
-                img-alt="Img"
-                img-top>
-            <p class="card-text">
-                <ul>
-                  <!-- <li>Tipo: {{servico.tipo}}</li> -->
-                  <!-- <li>Ano: {{servico.ano}}</li> -->
-                  <!-- <li>Aro: {{servico.aro}}</li>  -->
-                  <!-- <li>Marchas: {{servico.num_marchas}}</li> -->
-                </ul>
-            </p>
-            
-            <div slot="footer">
-                <!-- <b-btn :id="servico.id" type="button" :disabled="servico.contratado == true" variant="primary"  @click="selectBike(bike.id)">Alugue</b-btn> -->
-                <b-btn :id="servico.id" type="button" variant="primary">Alugue</b-btn>
-            </div>
-        </b-card>
-    </b-card-group>
-  </b-row>
+  <div class="container">    
+    <div class="row">
+      <div class="col-sm-3 servico-card" v-for="servico in filteredServicos" :key="servico.id">
+        <div class="panel panel-primary">
+          <div class="panel-heading card-title">{{ servico.nome }}</div>
+          <div class="panel-body">
+            <img :src= "servico.link_imagem" :alt="servico.nome" class="img-responsive" width="100%">
+          </div>
+        </div>
+        <div class="card-button">
+          <b-btn :id="servico.id" type="button" variant="primary">Ver mais</b-btn>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-
-    
-  
 </template>
 
 <script>
-//import HelloWorld from './components/HelloWorld.vue'
 import Navbar from "../components/Navbar.vue";
 import axios from "axios";
 
@@ -62,7 +33,6 @@ export default {
     return {
       search: "",
       servicos: [],
-      teste:""
     };
   },
   async created() {
@@ -74,15 +44,8 @@ export default {
   computed: {
     filteredServicos: function () {
       return this.servicos.filter((servicos) => {
-        return servicos.nome.match(this.search) !== null;
+        return servicos.nome.toLowerCase().match(this.search.toLowerCase()) !== null;
       });
-    },
-    formattedServicos() {
-      return this.servicos.reduce((c, n, i) => {
-        if (i % 4 === 0) c.push([]);
-        c[c.length - 1].push(n);
-        return c;
-      }, []);
     },
 
     searchServicos() {
@@ -92,29 +55,31 @@ export default {
   },
   
   methods:{
-    updateSearch(variable){
-      this.search = variable;
+    updateSearch(data){
+      this.search = data;
     },
   }
 };
-
-
 </script>
 
 <style>
-#logo {
-  max-width: 80px;
-  max-height: 80px;
+.row {
+  justify-content: center;
 }
 
-.input-search {
-  height: 50%;
-  width: 30%;
-  margin-left: 30%;
+.servico-card {
+  background-color: #E7E9EB;
+  margin: 1em .5em .5em .5em;
 }
 
-.mb-2 {
-  margin-left: 10px;
+.card-title {
+  font-size: 1.5em;
+}
+
+.card-button {
+  padding-top: 1em;
+  padding-bottom: .5em;
+  
 }
 </style>
 
